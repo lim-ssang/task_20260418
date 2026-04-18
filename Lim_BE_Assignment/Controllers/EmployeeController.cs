@@ -76,6 +76,11 @@ namespace Lim_BE_Assignment.Controllers
             var token = HttpContext.RequestAborted;
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
+            if (string.IsNullOrEmpty(contentType))
+            {
+                return new JsonResult("지원하지 않는 ContentType입니다.") { StatusCode = 415 };
+            }
+
             if (contentType.StartsWith("application/json", StringComparison.OrdinalIgnoreCase))
             {
                 try
@@ -138,7 +143,8 @@ namespace Lim_BE_Assignment.Controllers
                 return Created("", resultList);
             }
 
-            return BadRequest("지원하지 않는 ContentType입니다.");
+            return new JsonResult("지원하지 않는 ContentType입니다.") { StatusCode = 415 };
+
         }
     }
 }
