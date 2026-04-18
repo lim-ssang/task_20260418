@@ -3,6 +3,9 @@ using Lim_BE_Assignment.Entites;
 
 namespace Lim_BE_Assignment.Services
 {
+    /// <summary>
+    /// 서비스 기동시 초기화
+    /// </summary>
     public class InitService : IHostedService
     {
         private readonly ILogger<InitService> logger;
@@ -15,6 +18,11 @@ namespace Lim_BE_Assignment.Services
             this.logger = logger;
         }
 
+        /// <summary>
+        /// 서버 기동시 초기화.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             logger.LogInformation("Service Start.");
@@ -33,6 +41,11 @@ namespace Lim_BE_Assignment.Services
             employserivce.InsertEmployee(initDataList);
         }
 
+        /// <summary>
+        /// 서버 종료시 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken)
         {
             logger.LogInformation("Server Stop...");
