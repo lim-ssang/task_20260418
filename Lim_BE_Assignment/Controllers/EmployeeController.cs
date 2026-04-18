@@ -91,6 +91,7 @@ namespace Lim_BE_Assignment.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.LogError(ex.Message);
                     return NotFound(ex.Message);
                 }
             }

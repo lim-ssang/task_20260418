@@ -1,9 +1,22 @@
 using Lim_BE_Assignment.Services;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Filters;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(
+        path: "logs/app-.log",          // 파일 경로
+        rollingInterval: RollingInterval.Day,   // 날짜별 파일 분리
+        retainedFileCountLimit: 30,             // 최대 30일치 보관
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+    )
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
 
 // Add services to the container.
 builder.Services.AddMemoryCache();

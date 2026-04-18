@@ -5,15 +5,22 @@ namespace Lim_BE_Assignment.Services
 {
     public class InitService : IHostedService
     {
+        private readonly ILogger<InitService> logger;
+
         private readonly IServiceScopeFactory scopeFactory;
 
-        public InitService(IServiceScopeFactory scopeFactory)
+        public InitService(IServiceScopeFactory scopeFactory, ILogger<InitService> logger)
         {
             this.scopeFactory = scopeFactory;
+            this.logger = logger;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            logger.LogInformation("Service Start.");
+            logger.LogWarning("Service Start.");
+            logger.LogError("Service Start.");
+
             using var scope = scopeFactory.CreateScope();
             var employserivce = scope.ServiceProvider.GetRequiredService<EmployeeService>();
 
@@ -28,6 +35,10 @@ namespace Lim_BE_Assignment.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            logger.LogInformation("Server Stop...");
+            logger.LogWarning("Server Stop...");
+            logger.LogError("Server Stop...");
+
             return Task.CompletedTask;
         }
     }

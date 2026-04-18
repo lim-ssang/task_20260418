@@ -6,17 +6,21 @@ using Lim_BE_Assignment.Dtos.Response;
 using Lim_BE_Assignment.Entites;
 using Microsoft.Extensions.Caching.Memory;
 using System.Globalization;
+using System.Text.Json;
 
 namespace Lim_BE_Assignment.Services
 {
     public class EmployeeService
     {
+        private readonly ILogger<EmployeeService> logger;
+
         private readonly IMemoryCache memoryCache;
 
         private const string EMPLOYEE_CACHE_KEY = "CACHE:employee_list";
-        public EmployeeService(IMemoryCache memoryCache)
+        public EmployeeService(IMemoryCache memoryCache, ILogger<EmployeeService> logger)
         {
             this.memoryCache = memoryCache;
+            this.logger = logger;
         }
 
         public PageResponse<EmployeeResponse> GetEmployeeList(int page = 1, int pageSize = 30)
@@ -76,8 +80,10 @@ namespace Lim_BE_Assignment.Services
             if (list == null) list = new List<Employee>();
 
             list.AddRange(employee);
-
+            
             memoryCache.Set<List<Employee>>(EMPLOYEE_CACHE_KEY, list);
+
+            logger.LogInformation($"Add Employee - {JsonSerializer.Serialize(employee)}");
         }
 
         private void AddEmployee(Employee employee) {
