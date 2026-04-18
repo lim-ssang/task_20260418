@@ -1,0 +1,20 @@
+[
+    {
+        "email": "clo@clovf.com",
+        "joined": "2012-01-05",
+        "name": "김클로",
+        "tel": "010-1111-2345"
+    },
+    {
+        "email": "md@clovf.com",
+        "joined": "2013-07-01",
+        "name": "박마들",
+        "tel": "010-3535-2245"
+    },
+    {
+        "email": "clo@clovf.com",
+        "joined": "2019-01-05",
+        "name": "홍커넥",
+        "tel": "010-1231-6666"
+    }
+]
