@@ -5,6 +5,6 @@
         public string Name { get; set; }
         public string Email { get; set; }
         public string TelNo { get; set; }
-        public DateTimeOffset JoinedAt { get; set; }
+        public string JoinedDate { get; set; }
     }
 }
